@@ -5,7 +5,7 @@
         </textarea>
         <hr class="my-4">
         <footer class="flex justify-between">
-            <img src="{{auth()->user()->avatar}}" class="rounded-full mr-2" alt="">
+            <img src="{{auth()->user()->avatar}}" width="50" height="50" class="rounded-full mr-2" alt="">
             <button class="bg-blue-500 shadow rounded-lg py-2 px-2 text-white" type="submit">Tweet-a-roo</button>
         </footer>
     </form>
