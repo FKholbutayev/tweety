@@ -4,7 +4,7 @@
 
     <li class="mb-4">
         <div class="flex items-center text-sm">
-            <img src="{{$user->avatar}}" alt="User avatar">
+            <img src="{{$user->avatar}}" class="rounded-full mr-2" alt="User avatar">
             {{$user->name}}
         </div>
     </li>
