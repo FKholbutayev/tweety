@@ -38,10 +38,12 @@ class User extends Authenticatable {
     ];
 
     public function timeline() {
-        return Tweet::where('user_id', $this->id)->latest()->get();
+        $friends = $this->follows()->pluck('id');
+        return Tweet::whereIn('user_id', $friends)
+                    ->orWhere('user_id', $this->id)
+                    ->latest()->get();
     }
 
-    //does same as in timeline method
     public function tweets() {
         return $this->hasMany(Tweet::class, 'user_id');
     }
