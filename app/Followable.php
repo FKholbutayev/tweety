@@ -11,4 +11,8 @@ trait Followable {
     public function follow($user) {
             return $this->follows()->save($user);
     }
+
+    public function isFollowing() {
+
+    }
 } 

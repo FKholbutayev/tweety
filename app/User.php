@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Tweet;
-use App\UserTrait\Followable;
+use App\Followable;
 
 class User extends Authenticatable {
     use Notifiable, Followable;
@@ -53,11 +53,9 @@ class User extends Authenticatable {
         return "https://i.pravatar.cc/200?u=" .$this->email;
     }
 
-    public function follows() {
-        return $this->belongsToMany(User::class, 'follows', 'user_id', 'following_user_id');
+    public function getRouteKeyName() {
+        return 'name';
     }
 
-    public function follow($user) {
-        return $this->follows()->save($user);
-    }
+    
 }
