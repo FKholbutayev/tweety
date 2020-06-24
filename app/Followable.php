@@ -22,4 +22,13 @@ trait Followable {
     public function unfollow($user) {
         return $this->follows()->detach($user);
     }
+
+    public function toggleFollow(User $user) {
+        
+        if ($this->isFollowing($user)) {
+             return $this->unfollow($user);
+        } else {
+             return $this->follow($user);
+        }
+    }
 } 
