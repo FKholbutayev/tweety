@@ -8,13 +8,23 @@
                 <p class="text-sm">Joined {{$user->created_at->diffForHumans()}}</p>
             </div>
 
-            <div>
+            <div class="flex">
                 <a href="" class="mr-2 rounded-full border border-gray-300 text-black px-4 py-2 text-black text-xs">
                     Edit Profile
                 </a>
-                <a href="" class="bg-blue-500 rounded-full shadow px-4 py-2 text-white text-xs">
-                    Follow me
-                </a>
+
+                <form method="POST" action="/profiles/{{$user->name}}/follow">
+                    @csrf
+
+                    <button type="submit" class="bg-blue-500 rounded-full shadow px-4 py-2 text-white text-xs">
+                        {{ 
+                            auth()
+                            ->user()
+                            ->isFollowing($user) ? 'Unfollow Me': 'Follow Me' }}
+                    </button>
+
+                </form>
+
             </div>
         </div>
         <p class="text-sm">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has

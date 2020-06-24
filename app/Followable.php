@@ -1,6 +1,7 @@
 <?php
 
 namespace App; 
+use App\User;
 
 trait Followable {
 
@@ -12,7 +13,13 @@ trait Followable {
             return $this->follows()->save($user);
     }
 
-    public function isFollowing() {
+    public function isFollowing(User $user) {
+        return $this->follows()
+             ->where('following_user_id', $user->id)
+             ->exists();
+    }
 
+    public function unfollow($user) {
+        return $this->follows()->detach($user);
     }
 } 

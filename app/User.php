@@ -53,9 +53,7 @@ class User extends Authenticatable {
         return "https://i.pravatar.cc/200?u=" .$this->email;
     }
 
-    public function getRouteKeyName() {
-        return 'name';
-    }
+ 
 
     
 }
