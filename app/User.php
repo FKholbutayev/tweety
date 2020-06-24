@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Tweet;
-use App\Followable;
+use App\UserTrait\Followable;
 
 class User extends Authenticatable {
     use Notifiable, Followable;
