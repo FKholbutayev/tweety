@@ -50,7 +50,9 @@ class User extends Authenticatable {
     }
 
     public function getAvatarAttribute($value) {
-        return asset('storage/' . $value);
+        
+        $avatar = $value ? 'storage/'.$value : '/images/default.jpg';
+        return asset($avatar);
     }
 
     public function path($append = '') {
@@ -59,6 +61,15 @@ class User extends Authenticatable {
 
         return $append ? "{$path}/{$append}" : $path;
     }
+
+    // user->password="pswd" it will pipe through this method
+    
+    public function setPasswordAttribute($value) {
+        
+        $this->attributes['password'] = bcrypt($value);   
+    }
+
+
 
  
 

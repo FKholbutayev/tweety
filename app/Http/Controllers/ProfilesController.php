@@ -45,7 +45,9 @@ class ProfilesController extends Controller {
         ]);
 
         // save the path where the image located
-        $attributes['avatar'] = request('avatar')->store('avatars');
+        if(request('avatar')) {
+            $attributes['avatar'] = request('avatar')->store('avatars');
+        }
 
         $user->update($attributes); 
 
