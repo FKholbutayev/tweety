@@ -1,3 +1,6 @@
+@if (auth()->user()->isNot($user))
+
+
 <form method="POST" action="/profiles/{{$user->name}}/follow">
     @csrf
 
@@ -9,3 +12,5 @@
     </button>
 
 </form>
+
+@endif

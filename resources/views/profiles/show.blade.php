@@ -16,9 +16,12 @@
             </div>
 
             <div class="flex">
+                @if (current_user()->is($user))
+
                 <a href="" class="mr-2 rounded-full border border-gray-300 text-black px-4 py-2 text-black text-xs">
                     Edit Profile
                 </a>
+                @endif
 
                 <x-follow-button :user="$user"></x-follow-button>
 
