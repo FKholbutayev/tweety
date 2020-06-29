@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule; 
 use App\User;
 
 class ProfilesController extends Controller {
@@ -20,7 +21,7 @@ class ProfilesController extends Controller {
 
     public function update(User $user) {
 
-        request()->validate([
+        $attributes = request()->validate([
 
             'username' => [
                 'string', 
@@ -31,7 +32,7 @@ class ProfilesController extends Controller {
             ], 
 
             'name' => ['string', 'required', 'max:255'],
-
+            'avatar' => ['file'],
             'email' => [
                 'string', 
                 'email', 
@@ -42,5 +43,12 @@ class ProfilesController extends Controller {
 
             'password' => ['string', 'required', 'min:6', 'max:255', 'confirmed']
         ]);
+
+        // save the path where the image located
+        $attributes['avatar'] = request('avatar')->store('avatars');
+
+        $user->update($attributes); 
+
+        return redirect($user->path());
     }
 }

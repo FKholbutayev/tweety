@@ -17,7 +17,7 @@ class User extends Authenticatable {
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'username'
+        'name', 'email', 'password','avatar','username'
     ];
 
     /**
@@ -49,8 +49,8 @@ class User extends Authenticatable {
         return $this->hasMany(Tweet::class, 'user_id')->latest();
     }
 
-    public function getAvatarAttribute() {
-        return "https://i.pravatar.cc/200?u=" .$this->email;
+    public function getAvatarAttribute($value) {
+        return asset('storage/' . $value);
     }
 
     public function path($append = '') {
