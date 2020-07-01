@@ -1,77 +1,60 @@
 <x-master>
     <div class="container mx-auto flex justify-center">
-        <div class="px-6 py-4 bg-gray-400 rounded-lg">
-            <div class="col-md-8">
-                <div class="card-header">{{ __('Login') }}</div>
+        <x-panel>
+            <x-slot name="heading">Login</x-slot>
 
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
+            <form method="POST" action="{{ route('login') }}">
+                @csrf
 
-                    <div class="mb-6">
-                        <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="email">
-                            Email
+                <div class="mb-6">
+                    <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="email">
+                        Email
+                    </label>
+
+                    <input class="border border-gray-400 p-2 w-full" type="text" name="email" id="email"
+                        autocomplete="email" value="{{ old('email') }}" required>
+                    @error('email')
+                    <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
+                </div>
+
+
+                <div class="mb-6">
+                    <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="password">
+                        Password
+                    </label>
+                    <input class="border border-gray-400 p-2 w-full" type="password" name="password" id="password"
+                        autocomplete="current-password">
+
+                    @error('password')
+                    <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-6">
+                    <div>
+                        <input class="mr-1" type="checkbox" name="remember" id="remember"
+                            {{ old('remember') ? ' checked' : '' }}>
+
+                        <label class="text-xs text-gray-700 font-bold uppercase" for="remember">
+                            Remember Me
                         </label>
-
-                        <input class="border border-gray-400 p-2 w-full" type="text" name="email" id="email"
-                            autocomplete="email" value="{{ old('email') }}" required>
-
-                        @error('email')
-                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                        @enderror
                     </div>
 
-                    <div class="mb-6">
-                        <label class="block mb-2 uppercase font-bold text-xs text-gray-700" for="password">
-                            Password
-                        </label>
-                        <input class="border border-gray-400 p-2 w-full" type="password" name="password" id="password"
-                            autocomplete="current-password">
+                    @error('remember')
+                    <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                    @enderror
+                </div>
 
-                        @error('password')
-                        <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                        @enderror
-                    </div>
+                <div>
+                    <button type="submit" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 mr-2">
+                        Submit
+                    </button>
 
-                    <div class="mb-6">
-                        <div>
-                            <input class="mr-1" type="checkbox" name="remember" id="remember"
-                                {{ old('remember') ? ' checked' : '' }}>
-
-                            <label class="text-xs text-gray-700 font-bold uppercase" for="remember">
-                                Remember Me
-                            </label>
-
-                            @error('remember')
-                            <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div>
-                            <button type="submit"
-                                class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500 mr-2">
-                                Submit
-                            </button>
-
-                            <a href="{{ route('password.request') }}" class="text-xs text-gray-700">Forgot Your
-                                Password?</a>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit"
-                                    class="px-6 py-3 rounded text-sm uppercase bg-blue-600 text-white">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                                @endif
-                            </div>
-                        </div>
-                </form>
-            </div>
-        </div>
+                    <a href="{{ route('password.request') }}" class="text-xs text-gray-700">Forgot Your
+                        Password?</a>
+                </div>
+            </form>
+        </x-panel>
     </div>
 </x-master>
