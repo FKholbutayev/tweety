@@ -1,5 +1,4 @@
-@if (auth()->user()->isNot($user))
-
+@unless (auth()->user()->is($user))
 
 <form method="POST" action="/profiles/{{$user->username}}/follow">
     @csrf
@@ -13,4 +12,4 @@
 
 </form>
 
-@endif
+@endunless
